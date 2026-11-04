@@ -9,7 +9,7 @@ a2uiPublishing {
 }
 
 kotlin {
-    a2uiTargets()
+    a2uiTargets(providers.gradleProperty("enableOhosX64").orElse("false").get().toBoolean())
     upstreamSources(this, "a2ui/compose/compose-ui-testing")
     upstreamUiTestsOnDesktop(this, "a2ui/compose/compose-ui-testing")
 
@@ -25,7 +25,7 @@ kotlin {
                 implementation(project(":a2ui-engine"))
             }
         }
-        named("desktopTest") {
+        findByName("desktopTest")?.apply {
             // runComposeUiTest is still experimental in Compose Multiplatform 1.12.
             languageSettings.optIn("androidx.compose.ui.test.ExperimentalTestApi")
             dependencies {

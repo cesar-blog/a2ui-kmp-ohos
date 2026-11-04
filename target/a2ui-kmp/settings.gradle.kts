@@ -7,6 +7,7 @@ pluginManagement {
     // The build logic both builds share: the a2ui.publish plugin and the module helpers.
     includeBuild("../build-logic")
     repositories {
+        maven("https://maven.eazytec-cloud.com/nexus/repository/maven-public/")
         google()
         mavenCentral()
         gradlePluginPortal()
@@ -14,8 +15,7 @@ pluginManagement {
 }
 dependencyResolutionManagement {
     repositories {
-        google()
-        mavenCentral()
+        maven("https://maven.eazytec-cloud.com/nexus/repository/maven-public/")
     }
     // The repository's one version catalog.
     versionCatalogs { create("libs") { from(files("../../gradle/libs.versions.toml")) } }

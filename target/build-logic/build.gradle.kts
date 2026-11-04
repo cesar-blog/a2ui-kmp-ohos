@@ -4,5 +4,4 @@ plugins {
 
 dependencies {
     compileOnly(libs.kotlin.gradlePlugin)
-    compileOnly(libs.mavenPublish.gradlePlugin)
 }

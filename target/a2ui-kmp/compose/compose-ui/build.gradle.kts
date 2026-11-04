@@ -9,7 +9,7 @@ a2uiPublishing {
 }
 
 kotlin {
-    a2uiTargets()
+    a2uiTargets(providers.gradleProperty("enableOhosX64").orElse("false").get().toBoolean())
     upstreamSources(this, "a2ui/compose/compose-ui")
 
     sourceSets {
@@ -23,7 +23,7 @@ kotlin {
                 implementation(libs.androidx.collection)
             }
         }
-        named("desktopTest") {
+        findByName("desktopTest")?.apply {
             dependencies {
                 implementation(kotlin("test"))
                 implementation(libs.junit)

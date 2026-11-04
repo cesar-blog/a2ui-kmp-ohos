@@ -1,0 +1,16 @@
+package ai.littlepress.a2ui.compat.java.util
+
+/** ISO 4217 code validation. OHOS exposes number formatting but no public ucurr enumeration API. */
+public actual class Currency private constructor(public actual val currencyCode: String) {
+    public actual companion object {
+        public actual fun getInstance(currencyCode: String): Currency {
+            require(currencyCode in ISO_CURRENCY_CODES) { "Unknown currency code: $currencyCode" }
+            return Currency(currencyCode)
+        }
+    }
+}
+
+// Snapshot generated from java.util.Currency.getAvailableCurrencies(), OpenJDK on 2026-11-04.
+// Historical ISO codes are retained, as java.util.Currency does; no made-up three-letter codes.
+private val ISO_CURRENCY_CODES: Set<String> =
+    "ADP AED AFA AFN ALL AMD ANG AOA ARS ATS AUD AWG AYM AZM AZN BAM BBD BDT BEF BGL BGN BHD BIF BMD BND BOB BOV BRL BSD BTN BWP BYB BYN BYR BZD CAD CDF CHE CHF CHW CLF CLP CNY COP COU CRC CSD CUC CUP CVE CYP CZK DEM DJF DKK DOP DZD EEK EGP ERN ESP ETB EUR FIM FJD FKP FRF GBP GEL GHC GHS GIP GMD GNF GRD GTQ GWP GYD HKD HNL HRK HTG HUF IDR IEP ILS INR IQD IRR ISK ITL JMD JOD JPY KES KGS KHR KMF KPW KRW KWD KYD KZT LAK LBP LKR LRD LSL LTL LUF LVL LYD MAD MDL MGA MGF MKD MMK MNT MOP MRO MRU MTL MUR MVR MWK MXN MXV MYR MZM MZN NAD NGN NIO NLG NOK NPR NZD OMR PAB PEN PGK PHP PKR PLN PTE PYG QAR ROL RON RSD RUB RUR RWF SAR SBD SCR SDD SDG SEK SGD SHP SIT SKK SLE SLL SOS SRD SRG SSP STD STN SVC SYP SZL THB TJS TMM TMT TND TOP TPE TRL TRY TTD TWD TZS UAH UGX USD USN USS UYI UYU UZS VEB VED VEF VES VND VUV WST XAD XAF XAG XAU XBA XBB XBC XBD XCD XCG XDR XFO XFU XOF XPD XPF XPT XSU XTS XUA XXX YER YUM ZAR ZMK ZMW ZWD ZWG ZWL ZWN ZWR".split(' ').toSet()

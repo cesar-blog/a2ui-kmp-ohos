@@ -1,3 +1,5 @@
+# OHOS profile: fixed CPF KMP 2.2.21-1.2.0 / CMP 1.9.2-1.2.0.
+# Inactive material3-a2ui entries below are retained from upstream as reference.
 # Every version this repository builds and tests with: target/a2ui-kmp, target/material3-a2ui-kmp,
 # target/build-logic and tests/integration. (The samples are separate projects with their own catalogs.)
 #
@@ -12,26 +14,26 @@
 # This release: our artifacts are ai.littlepress.a2ui:<package>:<a2uiKmp>, built from the AndroidX
 # A2UI release <a2uiUpstream> in source/ (source/UPSTREAM); on Android they resolve to the official
 # androidx.a2ui artifacts of that version. scripts/sync-upstream.py sets both.
-a2uiKmp = "1.0.0-alpha02"
+a2uiKmp = "1.0.0-alpha02-ohos.0.1.0"
 a2uiUpstream = "1.0.0-alpha02"
 # Kotlin: the line Compose Multiplatform is built with. The common metadata and the JVM class files are
 # Kotlin 2.2 (languageVersion / apiVersion, as upstream androidx.a2ui 1.0.0-alpha02); on iOS, what a
 # consumer needs is the klib ABI version, 2.3 for target/a2ui-kmp and 2.4 for target/material3-a2ui-kmp.
-kotlin = "2.3.21"
+kotlin = "2.2.21-1.2.0"
 kotlinMaterial3 = "2.4.0"
 # Google's Compose runtime is multiplatform. Upstream builds with 1.13.0-alpha03; the five packages
 # need nothing newer than the stable 1.12 line. On Android our artifacts resolve to the official
 # ones, which require 1.13.0-alpha03 there.
-composeRuntime = "1.12.1"
+composeRuntime = "1.9.2-1.2.0"
 composeRuntimeMaterial3 = "1.13.0-alpha03"
 # Google's Compose UI has no iOS build; JetBrains Compose Multiplatform does (on Android it is Google's).
-composeMultiplatform = "1.12.2"
+composeMultiplatform = "1.9.2-1.2.0"
 composeMultiplatformMaterial3 = "1.13.0-beta01"
 # Same versions as upstream androidx.a2ui 1.0.0-alpha02 (a2ui/*/build.gradle at e0a272dc).
-kotlinxSerialization = "1.7.3"
-kotlinxCoroutines = "1.9.0"
-androidxCollection = "1.6.0"
-androidxAnnotation = "1.10.0"
+kotlinxSerialization = "1.9.1-1.0.0"
+kotlinxCoroutines = "1.10.2-1.0.0"
+androidxCollection = "1.9.2-1.2.0"
+androidxAnnotation = "1.9.2-1.2.0"
 truth = "1.4.4"
 junit = "4.13.2"
 guava = "33.4.8-jre"
@@ -59,7 +61,7 @@ kotlin-gradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", ve
 mavenPublish-gradlePlugin = { module = "com.vanniktech:gradle-maven-publish-plugin", version.ref = "mavenPublish" }
 
 # target/a2ui-kmp
-compose-runtime = { module = "androidx.compose.runtime:runtime", version.ref = "composeRuntime" }
+compose-runtime = { module = "org.jetbrains.compose.runtime:runtime", version.ref = "composeRuntime" }
 compose-ui = { module = "org.jetbrains.compose.ui:ui", version.ref = "composeMultiplatform" }
 compose-foundation = { module = "org.jetbrains.compose.foundation:foundation", version.ref = "composeMultiplatform" }
 # Compose UI tests on desktop (upstream's instrumented tests), with the Skia runtime for the host.
@@ -78,8 +80,8 @@ material3-compose-ui-test = { module = "org.jetbrains.compose.ui:ui-test", versi
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlinxCoroutines" }
 kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinxCoroutines" }
-androidx-annotation = { module = "androidx.annotation:annotation", version.ref = "androidxAnnotation" }
-androidx-collection = { module = "androidx.collection:collection", version.ref = "androidxCollection" }
+androidx-annotation = { module = "org.jetbrains.compose.annotation-internal:annotation", version.ref = "androidxAnnotation" }
+androidx-collection = { module = "org.jetbrains.compose.collection-internal:collection", version.ref = "androidxCollection" }
 test-parameter-injector = { module = "com.google.testparameterinjector:test-parameter-injector", version.ref = "testParameterInjector" }
 truth = { module = "com.google.truth:truth", version.ref = "truth" }
 junit = { module = "junit:junit", version.ref = "junit" }

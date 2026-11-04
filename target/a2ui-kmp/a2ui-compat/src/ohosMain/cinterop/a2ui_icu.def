@@ -1,0 +1,4 @@
+headers = a2ui_icu.h
+headerFilter = a2ui_icu.h
+package = ai.littlepress.a2ui.compat.icu
+linkerOpts = -licu

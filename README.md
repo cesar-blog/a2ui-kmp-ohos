@@ -1,3 +1,5 @@
+> OHOS 适配入口：参见 [README-OHOS.md](README-OHOS.md)。当前 profile 固定 CPF KMP 2.2.21-1.2.0 / CMP 1.9.2-1.2.0，默认构建 OHOS ARM64。下文保留上游项目介绍。
+
 # a2ui-kmp
 
 Google's [Agent-to-UI renderer for Jetpack Compose](https://developer.android.com/develop/ui/compose/agentic)

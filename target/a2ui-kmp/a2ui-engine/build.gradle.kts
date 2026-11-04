@@ -8,7 +8,7 @@ a2uiPublishing {
 }
 
 kotlin {
-    a2uiTargets()
+    a2uiTargets(providers.gradleProperty("enableOhosX64").orElse("false").get().toBoolean())
     upstreamSources(this, "a2ui/a2ui-engine")
 
     sourceSets {
@@ -20,7 +20,7 @@ kotlin {
                 implementation(libs.kotlinx.serialization.json)
             }
         }
-        named("desktopTest") {
+        findByName("desktopTest")?.apply {
             dependencies {
                 implementation(kotlin("test"))
                 implementation(libs.junit)

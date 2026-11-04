@@ -5,13 +5,6 @@
       "kotlin-jvm-imports"
     ]
   },
-  "androidx/a2ui/compose/ui/catalog/A2uiBasicCatalogV1.kt": {
-    "upstreamSha256": "fce5ef55ac92c1543176098ba86068c270b67b2477c7e410d04eafbacc1fe84a",
-    "rules": [
-      "platform-imports",
-      "locale-constants"
-    ]
-  },
   "androidx/a2ui/compose/ui/catalog/A2uiBasicCatalogV1FunctionDefaults.kt": {
     "upstreamSha256": "b5251b09417d7601bb4d5f02b6e392829351d6cdf46e4d6c2a217e0fcd6255cb",
     "rules": [

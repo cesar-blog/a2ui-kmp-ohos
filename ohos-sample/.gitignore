@@ -1,0 +1,15 @@
+.gradle/
+.kotlin/
+build/
+**/build/
+local.properties
+**/oh_modules/
+**/.hvigor/
+**/.idea/
+**/oh-package-lock.json5
+harmonyApp/entry/libs/
+harmonyApp/entry/src/main/cpp/include/
+*.p12
+*.p7b
+*.cer
+*.key

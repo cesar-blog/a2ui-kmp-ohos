@@ -6,10 +6,17 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinMultiplatformExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 /** The targets and compiler settings every module uses, in target/a2ui-kmp and target/material3-a2ui-kmp. */
-fun KotlinMultiplatformExtension.a2uiTargets() {
-    jvm("desktop")
-    iosArm64()
-    iosSimulatorArm64()
+fun KotlinMultiplatformExtension.a2uiTargets(enableOhosX64: Boolean = false) {
+    ohosArm64()
+    if (enableOhosX64) ohosX64()
+    val ohosShared = sourceSets.maybeCreate("ohosMain")
+    ohosShared.dependsOn(sourceSets.getByName("commonMain"))
+    sourceSets.getByName("ohosArm64Main").dependsOn(ohosShared)
+    sourceSets.findByName("ohosX64Main")?.dependsOn(ohosShared)
+    val ohosTests = sourceSets.maybeCreate("ohosTest")
+    ohosTests.dependsOn(sourceSets.getByName("commonTest"))
+    sourceSets.getByName("ohosArm64Test").dependsOn(ohosTests)
+    sourceSets.findByName("ohosX64Test")?.dependsOn(ohosTests)
     compilerOptions {
         languageVersion.set(KotlinVersion.KOTLIN_2_2)
         apiVersion.set(KotlinVersion.KOTLIN_2_2)
@@ -35,9 +42,10 @@ fun Project.upstreamSources(kotlin: KotlinMultiplatformExtension, upstreamPath: 
         srcDir(manual)
         exclude { it.file.startsWith(main) && it.relativePath.pathString in overlaid }
     }
-    val desktopTest = kotlin.sourceSets.getByName("desktopTest")
-    desktopTest.kotlin.srcDir(upstream.resolve("test/kotlin"))
-    desktopTest.resources.srcDir(upstream.resolve("test/resources"))
+    kotlin.sourceSets.findByName("desktopTest")?.apply {
+        this.kotlin.srcDir(upstream.resolve("test/kotlin"))
+        resources.srcDir(upstream.resolve("test/resources"))
+    }
 }
 
 /** source/: AndroidX's sources as synced. Both builds (target/a2ui-kmp, target/material3-a2ui-kmp) are two levels down. */
@@ -53,7 +61,7 @@ private fun relativeFiles(dir: File): Set<String> =
  */
 fun Project.upstreamUiTestsOnDesktop(kotlin: KotlinMultiplatformExtension, upstreamPath: String) {
     val tests = upstreamRoot().resolve(upstreamPath).resolve("src/androidTest/kotlin").canonicalFile
-    kotlin.sourceSets.getByName("desktopTest").kotlin.apply {
+    kotlin.sourceSets.findByName("desktopTest")?.kotlin?.apply {
         srcDir(tests)
         // tests/android-test-stand-ins, shared by both builds.
         srcDir(rootDir.resolve("../../tests/android-test-stand-ins/kotlin").canonicalFile)

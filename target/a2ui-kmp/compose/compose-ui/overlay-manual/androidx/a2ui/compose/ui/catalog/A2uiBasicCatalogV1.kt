@@ -3037,7 +3037,7 @@ public class A2uiBasicCatalogV1(
             if (value.isEmpty()) return true
             val valueMillis = parseIsoDateTimeToUtcMillis(value)
             if (valueMillis == null) {
-                SideEffect(value) {
+                CompatKeyedSideEffect(value) {
                     reportError(
                         A2uiException.A2uiRuntimeException("Invalid date-time format: $value")
                     )
@@ -3457,4 +3457,16 @@ internal fun formatUtcMillisToIso(
         }
     val formatter = SimpleDateFormat(pattern, Locales.US).apply { timeZone = utcZone }
     return formatter.format(date)
+}
+
+/** Keyed SideEffect backport for the CPF Compose 1.9.2 runtime. */
+@Composable
+private fun CompatKeyedSideEffect(vararg keys: Any?, effect: () -> Unit) {
+    val committed = remember(*keys) { booleanArrayOf(false) }
+    SideEffect {
+        if (!committed[0]) {
+            committed[0] = true
+            effect()
+        }
+    }
 }

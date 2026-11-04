@@ -4,6 +4,7 @@
 // from ../../gradle/libs.versions.toml), so the same build logic runs with Kotlin 2.3 and 2.4.
 dependencyResolutionManagement {
     repositories {
+        maven("https://maven.eazytec-cloud.com/nexus/repository/maven-public/")
         gradlePluginPortal()
         mavenCentral()
         google()
